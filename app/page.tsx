@@ -1,113 +1,200 @@
-import Image from "next/image";
+import {Badge} from "@/components/ui/badge";
+import { ClockIcon, ListBulletIcon, VideoCameraIcon} from '@heroicons/react/24/outline'
+// import { BusinessExplanation } from "@/app/components/business_explanation";
+import {QuestionMarkCircledIcon, Pencil1Icon} from "@radix-ui/react-icons";
+import {Handshake, PhoneCall, Database, User} from "lucide-react";
+import { UserCircle } from 'lucide-react';
 
-export default function Home() {
+
+const stats = [
+    { value: '24/7 Availability', name: 'Our AI receptionist never sleeps, ensuring your customers receive support any time, day or night.' },
+    { value: 'Human-like Interaction', name: 'Advanced natural language processing allows for realistic and engaging conversations.' },
+    { value: 'Efficient Call Handling', name: 'Handles multiple calls simultaneously, reducing wait times and improving satisfaction.' },
+    { value: 'Cost-effective Solution', name: 'Reduce overhead costs associated with hiring and training human receptionists.' },
+    { value: 'Customizable Responses', name: 'Tailor the AI responses to match your desired unique voice and needs.' },
+    { value: 'Call Transferring', name: 'Easily transfer calls to the appropriate department or individual.' },
+    { value: 'Detailed Analytics', name: 'Gain insights from detailed reports on customer interactions and inquiries.' },
+    { value: 'Real-time Booking', name: 'Schedule appointments instantly through conversational interaction.' }
+];
+
+
+const features_for_points = [
+    {
+      name: 'Call Time Utilization',
+      description: 'Keep track of how much time is being spent on calls with a clear display of call time utilization.',
+      icon: ClockIcon,
+    },
+    {
+      name: 'Call Recording',
+      description: 'Easily toggle call recording on or off to capture important conversations. Retrieve recordings by emailing support with specific call dates.',
+      icon: VideoCameraIcon,
+    },
+    {
+      name: 'Call Logs',
+      description: 'Access a comprehensive list of all incoming and outgoing calls, complete with statuses, phone numbers, dates, and call durations.',
+      icon: ListBulletIcon,
+    },
+  ]
+  
+const audioFiles = [
+    {
+      id: 1,
+      name: "Ryan",
+      src: "https://www.dropbox.com/scl/fi/8rn1hbypgc9n9po640dpn/output.mp3?rlkey=dpv63ne26qgtkobkbquw2zrhr&st=l4o54d4u&raw=1"
+    },
+    {
+      id: 2,
+      name: "Richard",
+      src: "https://www.dropbox.com/scl/fi/z8294ludquoe77t771ti5/richard.mp3?rlkey=ng2ozkfuia9b77pbyph6hb5ux&st=16uqq4m4&raw=1"
+    },
+    {
+      id: 3,
+      name: "Ayanna",
+      src: "https://www.dropbox.com/scl/fi/lxqzd7bjlth65il02at3u/ayanna.mp3?rlkey=4z2h805xh3r5ivnr0uan3qzap&st=bjokx7ry&raw=1"
+    }
+  ];
+
+const features_and_stuff = [
+    {
+      name: 'Tailored AI Receptionists',
+      description:
+        'Start by completing a simple questionnaire about your business. Our platform uses your responses to create a customized AI receptionist.',
+      icon: User,
+    },
+    {
+      name: 'Editable AI Prompts',
+      description:
+        'Once your AI receptionist is set up, you can easily edit and refine the prompts to better match your business’s needs and tone.',
+      icon: Pencil1Icon,
+    },
+    {
+      name: 'Call Management',
+      description:
+        'View detailed call logs to track interactions and record calls for quality assurance and training purposes.',
+      icon: Database,
+    },
+    {
+      name: 'Dedicated Business Number',
+      description:
+        'Receive a dedicated phone number for your AI receptionist. Use it as your main business line or forward calls to it, ensuring you never miss a client call.',
+      icon: PhoneCall,
+    },
+  ]
+
+
+
+export default async function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+      <>
+          {/* Header */}
+          <div className="">
+              <main className="container mx-auto">
+                  <div className="relative md:mt-24 mx-auto w-full max-w-4xl pt-4 pb-44 text-center">
+                      <div className="justify-center hidden md:flex">
+                      </div>
+                      <h1 className="md:text-7xl my-4 font-extrabold text-4xl md:leading-tight">The First Conversational <span className="text-blue-700">AI Voice Assistant</span></h1>
+                      <h3 className="md:text-2xl">No more missed calls!</h3>
+                      <br />
+                      <h2 className="md:text-2xl">
+                      Your first virtual receptionist that knows everything you give it inside and out, ready to answer questions 24/7 
+                      </h2>
+                      <div
+                          className="absolute top-0 -z-10 max-h-full max-w-screen-lg w-full h-full blur-2xl">
+                          <div
+                              className="absolute top-24 left-24 w-56 h-56 bg-violet-600 rounded-full mix-blend-multiply opacity-70 animate-blob filter blur-3xl">
+                          </div>
+                          <div
+                              className="absolute hidden md:block bottom-2 right-1/4 w-56 h-56 bg-sky-600 rounded-full mix-blend-multiply opacity-70 animate-blob delay-1000 filter blur-3xl"></div>
+                          <div
+                              className="absolute hidden md:block bottom-1/4 left-1/3 w-56 h-56 bg-pink-600 rounded-full mix-blend-multiply opacity-70 animate-blob delay-500 filter blur-3xl"></div>
+                      </div>
+                  </div>
+              </main>
+          </div>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+            {/* Hyperrealistic Voices*/}
+            <div className="bg-white dark:bg-gray-900 py-24 sm:py-32 border-b border-border">
+                <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <h1 className="text-center text-4xl font-extrabold mb-10 text-blue-500 dark:text-blue-300 drop-shadow-lg">
+                    Experience Hyper-Realistic Voices
+                    </h1>
+                    
+                    <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto text-center pb-6">
+                    Our AI Voice Assistants are meticulously crafted to replicate human speech patterns, intonations, and nuances, ensuring a remarkably natural and immersive experience. With advanced speech synthesis technology, they engage users with a level of realism that fosters trust and familiarity.
+                    </p>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+                    <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
+                    <div className="mx-auto flex max-w-xs flex-col gap-y-4 items-center">
+                        <dt className="text-3xl font-bold leading-7 text-black dark:text-white">Ryan</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-200 sm:text-5xl">
+                        <audio controls className="">
+                            <source src="https://www.dropbox.com/scl/fi/8rn1hbypgc9n9po640dpn/output.mp3?rlkey=dpv63ne26qgtkobkbquw2zrhr&st=l4o54d4u&raw=1" type="audio/mpeg" />
+                            Your browser does not support the audio element.
+                        </audio>
+                        </dd>
+                    </div>
+                    <div className="mx-auto flex max-w-xs flex-col gap-y-4 items-center">
+                        <dt className="text-3xl font-bold leading-7 text-black dark:text-white">Richard</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-200 sm:text-5xl">
+                        <audio controls className="">
+                            <source src="https://www.dropbox.com/scl/fi/z8294ludquoe77t771ti5/richard.mp3?rlkey=ng2ozkfuia9b77pbyph6hb5ux&st=16uqq4m4&raw=1" type="audio/mpeg" />
+                            Your browser does not support the audio element.
+                        </audio>
+                        </dd>
+                    </div>
+                    <div className="mx-auto flex max-w-xs flex-col gap-y-4 items-center">
+                        <dt className="text-3xl font-bold leading-7 text-black dark:text-white">Ayanna</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-200 sm:text-5xl">
+                        <audio controls className="">
+                            <source src="https://www.dropbox.com/scl/fi/lxqzd7bjlth65il02at3u/ayanna.mp3?rlkey=4z2h805xh3r5ivnr0uan3qzap&st=bjokx7ry&raw=1" type="audio/mpeg" />
+                            Your browser does not support the audio element.
+                        </audio>
+                        </dd>
+                    </div>
+                    </dl>
+                </div>
+            </div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+
+            <section className="bg-gradient-to-b from-background to-transparent via-background via-90% relative">
+                {/* First Description */}
+                <div className="relative isolate overflow-hidden py-24 sm:py-32">
+                    <div
+                        className="absolute inset-0 flex items-center justify-center -z-10 transform-gpu blur-3xl"
+                        aria-hidden="true"
+                    >
+                        <div
+                            className="w-[68.5625rem] h-[68.5625rem] bg-gradient-radial from-[#ff4694] to-transparent opacity-20"
+                            style={{
+                                background: 'radial-gradient(circle, #ff4694, #ffffff)',
+                                clipPath:
+                                    'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                            }}
+                        />
+                    </div>
+
+                    <div className="mx-auto max-w-7xl px-6 lg:px-8 flex flex-col items-center text-center">
+                        <div className="max-w-2xl">
+                            <h2 className="font-bold text-3xl sm:text-5xl mb-4">A Truly Human-Like Conversational AI Voice Assistant</h2>
+                            <p className="mt-4 text-lg leading-8">
+                                Ensuring no questions go unanswered.
+                            </p>
+                        </div>
+                        <div className="mx-auto mt-5 max-w-2xl lg:max-w-none">
+                            <dl className="mt-8 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
+                                {stats.map((stat) => (
+                                    <div key={stat.name} className="flex flex-col items-center text-center">
+                                        <dd className="text-2xl font-bold leading-9 tracking-tight">{stat.value}</dd>
+                                        <dt className="text-base leading-7">{stat.name}</dt>
+                                    </div>
+                                ))}
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+          </section>
+      </>
   );
 }
