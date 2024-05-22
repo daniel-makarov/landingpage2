@@ -4,7 +4,75 @@ import { ClockIcon, ListBulletIcon, VideoCameraIcon} from '@heroicons/react/24/o
 import {QuestionMarkCircledIcon, Pencil1Icon} from "@radix-ui/react-icons";
 import {Handshake, PhoneCall, Database, User} from "lucide-react";
 import { UserCircle } from 'lucide-react';
+import prisma from "@/app/lib/db";
+import { revalidatePath, unstable_noStore as noStore } from "next/cache";
+import { GetUSNumber, GetCADNumber } from "./components/Submitbuttons";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { GeneratePrompt, SubmitButton } from "./components/Submitbuttons";
+import { cn } from "@/lib/utils"
+import { Separator } from "@/components/ui/separator"
+import { Switch } from "@/components/ui/switch"
+import { Button } from "@/components/ui/button"
+import { redirect } from "next/navigation";
+import { Star, Play } from 'lucide-react';
 
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+async function getData() {
+  noStore();
+  const data = await prisma.user.findUnique({
+    where: {
+      id: "kp_17aff834e67c44a3a6d069bd9eb81137",
+    },
+    select: {
+      name: true,
+      phoneNumber: true,
+      businessDescription: true,
+      productInformation: true,
+      contactInformation: true,
+      teamInformation: true,
+      paymentInformation: true,
+      receptionistInformation: true,
+      greetingInformation: true,
+      customerInformation: true,
+      sequenceInformation: true,
+      promptInformation: true,
+      voiceName: true,
+      Subscription: { // Select the Subscription relation
+        select: { maxTime: true } // Select the maxTime field from Subscription
+      }
+    },
+  });
+
+  return data;
+}
 
 const stats = [
     { value: '24/7 Availability', name: 'Our AI Voice Assistant never sleeps, ensuring your customers receive support any time, day or night.' },
@@ -82,6 +150,31 @@ const features_and_stuff = [
 
 
 export default async function Home() {
+  const data = await getData();
+  async function handleFormSubmitSaveData(formData: FormData) {
+    "use server";
+
+    const promptInfo = formData.get("promptInfo") as string;
+    const userId = "kp_17aff834e67c44a3a6d069bd9eb81137";
+
+    if (!userId) {
+      console.error("User ID is undefined");
+      return;
+    }
+
+    await prisma.user.update({
+      where: { id: userId },
+      data: { promptInformation: promptInfo ?? undefined },
+    });
+
+    console.log("promptInformation info updated:", promptInfo);
+
+    revalidatePath("/", "layout");
+    return promptInfo;
+  }
+
+  
+
   return (
       <>
           {/* Header */}
@@ -153,9 +246,6 @@ export default async function Home() {
                 </div>
             </div>
 
-
-
-
             <section className="bg-gradient-to-b from-background to-transparent via-background via-90% relative">
                 {/* First Description */}
                 <div className="relative isolate overflow-hidden py-24 sm:py-32">
@@ -193,6 +283,32 @@ export default async function Home() {
                     </div>
                 </div>
           </section>
+          <p className="text-center p-4 text-lg mb-4">Call <strong>+1 (343) 307-4471</strong> to talk to your virtual assistant.</p>
+          <div className="flex justify-center">
+          
+            <Card className="w-3/4 p-2 dark:bg-gray-800 shadow-lg rounded-lg bg-white">
+              <div className="w-full">
+                {/* Form stuff */}
+                <form action={handleFormSubmitSaveData}>
+                  <h2 className="text-2xl font-bold mb-1">The Receptionist&apos;s Prompt</h2>
+                  <div className="grid gap-1.5">
+                    <Textarea
+                      name="promptInfo"
+                      placeholder="Here are the instructions for your AI Receptionist. This is the information that your receptionist will use to interact with callers. Feel free to edit it!"
+                      id="promptInfo"
+                      maxLength={30000}
+                      defaultValue={data?.promptInformation ?? undefined}
+                      className="form-textarea block w-full"
+                      style={{ height: '50vh' }}
+                    />
+                  </div>
+                  <br />
+                  <SubmitButton />
+                </form>
+              </div>
+            </Card>
+          </div>
+
       </>
   );
 }
