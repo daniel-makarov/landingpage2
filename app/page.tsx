@@ -7,14 +7,12 @@ import { UserCircle } from 'lucide-react';
 
 
 const stats = [
-    { value: '24/7 Availability', name: 'Our AI receptionist never sleeps, ensuring your customers receive support any time, day or night.' },
+    { value: '24/7 Availability', name: 'Our AI Voice Assistant never sleeps, ensuring your customers receive support any time, day or night.' },
     { value: 'Human-like Interaction', name: 'Advanced natural language processing allows for realistic and engaging conversations.' },
     { value: 'Efficient Call Handling', name: 'Handles multiple calls simultaneously, reducing wait times and improving satisfaction.' },
     { value: 'Cost-effective Solution', name: 'Reduce overhead costs associated with hiring and training human receptionists.' },
     { value: 'Customizable Responses', name: 'Tailor the AI responses to match your desired unique voice and needs.' },
     { value: 'Call Transferring', name: 'Easily transfer calls to the appropriate department or individual.' },
-    { value: 'Detailed Analytics', name: 'Gain insights from detailed reports on customer interactions and inquiries.' },
-    { value: 'Real-time Booking', name: 'Schedule appointments instantly through conversational interaction.' }
 ];
 
 
